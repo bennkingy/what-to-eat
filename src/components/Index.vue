@@ -2,6 +2,7 @@
   <div class="index container">
     <div class="card" v-for="meal in meals" :key="meal.id">
       <div class="card-content">
+        <i class="material-icons delete" @click="deleteMeal(meal.id)">delete</i>
         <h2 class="indigo-text">{{ meal.title }}</h2>
         <ul class="ingredients">
           <li v-for="(ing, index) in meal.ingredients" :key="index">
@@ -22,6 +23,13 @@ export default {
         { title: 'Scrambled eggs on toast', slug: 'eggs-on-toas', ingredients: ['eggs', 'salt', 'milk', 'pepper', 'butter'], id: '1' },
         { title: 'Curry thing', slug: 'curry-thing', ingredients: ['curry power', 'chicken', 'crem freche', 'brocolli', 'golden rice'], id: '2' }
       ]
+    }
+  },
+  methods: {
+    deleteMeal(id) {
+      this.meals = this.meals.filter(meal => {
+        return meal.id != id;
+      })
     }
   }
 }
@@ -44,5 +52,13 @@ export default {
 }
 .index .ingredients li{
   display: inline-block;
+}
+.index .delete {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  cursor: pointer;
+  color: #aaa;
+  font-size: 1.4ems;
 }
 </style>
