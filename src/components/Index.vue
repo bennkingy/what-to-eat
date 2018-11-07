@@ -15,14 +15,12 @@
 </template>
 
 <script>
+import db from '@/firebase/init'
 export default {
   name: 'Index',
   data(){
     return{
-      meals: [
-        { title: 'Scrambled eggs on toast', slug: 'eggs-on-toas', ingredients: ['eggs', 'salt', 'milk', 'pepper', 'butter'], id: '1' },
-        { title: 'Curry thing', slug: 'curry-thing', ingredients: ['curry power', 'chicken', 'crem freche', 'brocolli', 'golden rice'], id: '2' }
-      ]
+      meals: []
     }
   },
   methods: {
@@ -31,6 +29,17 @@ export default {
         return meal.id != id
       })
     }
+  },
+  created(){
+  db.collection('meals').get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          console.log(doc.data())
+          let meal = doc.data()
+          meal.id = doc.id
+          this.meals.push(meal)
+        })
+      })
   }
 }
 </script>
