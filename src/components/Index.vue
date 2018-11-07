@@ -25,9 +25,15 @@ export default {
   },
   methods: {
     deleteMeal(id){
-      this.meals = this.meals.filter(meal => {
+      // this.meals = this.meals.filter(meal => {
+      //   return meal.id != id
+      // delete meal from db
+      db.collection('meals').doc(id).delete()
+      .then(()=> {
+        this.meals = this.meals.filter(meal => {
         return meal.id != id
       })
+     })
     }
   },
   created(){
