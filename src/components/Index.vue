@@ -26,9 +26,9 @@ export default {
     }
   },
   methods: {
-    deleteMeal(id) {
+    deleteMeal(id){
       this.meals = this.meals.filter(meal => {
-        return meal.id != id;
+        return meal.id != id
       })
     }
   }
@@ -53,12 +53,12 @@ export default {
 .index .ingredients li{
   display: inline-block;
 }
-.index .delete {
+.index .delete{
   position: absolute;
   top: 4px;
   right: 4px;
   cursor: pointer;
   color: #aaa;
-  font-size: 1.4ems;
+  font-size: 1.4em;
 }
 </style>
