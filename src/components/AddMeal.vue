@@ -8,15 +8,16 @@
              title:</label>
         <input type="text" name="title" v-model="title">
       </div>
+      <div v-for="(ing, index) in ingredients" :key="index">
+      <label for="ingredient">Ingredient:</label>
+      <input type="text" name="ingredient" v-model="ingredients[index]"></div>
       <div class="field add-ingredient">
-        <label for="add-ingredient">Add an ingredient (press tab to add):</label>
-        <input type="text" name="add-ingredient" @keydown.tab.prevent="addIng" v-model="another">
-      </div>
+        <label for="add-ingredient">Add an ingredient (press enter to add):</label>
+        <input type="text" name="add-ingredient" @keydown.enter.prevent="addIng" v-model="another">
+     </div>
       <div class="field center-align">
         <p v-if="feedback" class="red-text">{{ feedback }}</p>
-        <button class="btn pink">Add meal
-
-        </button>
+        <button class="btn pink">Add meal</button>
       </div>
     </form>
   </div>
@@ -41,7 +42,7 @@ export default {
     addIng(){
       if(this.another){
         this.ingredients.push(this.another)
-        // Set the ingredients and warning message to null each ingredient added
+        // Set the ingredients and warning message to null after each ingredients been added
         this.another = null
         this.feedback = null
       } else {
